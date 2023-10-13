@@ -92,7 +92,7 @@ function Signup() {
             <div className=" hidden md:flex md:h-[95%] md:w-[27%]  bg-slate-200  rounded-l-md flex justify-center items-center">
                 <img src="logoImage.png" alt="" className='bg-transparent h-[245px] w-[245px] rounded-full my-20  ' />
             </div>
-            <form className="space-y-4 shadow-lg  sm:w-full md:w-[28%] bg-white justify-center items-center py-8 my-10 flex flex-col" onSubmit={handleSubmit}>
+            <form className="space-y-4 shadow-lg  sm:w-full md:w-[28%] bg-white justify-center items-center px-10 py-8 my-10 flex flex-col" onSubmit={handleSubmit}>
                 <div className="flex justify-between text-2xl font-medium leading-8 text-uppercase text-black flex-initial w-64 mb-1">
                     <Link href={"/login"}>
                         LOGIN
