@@ -9,13 +9,11 @@ function BookCard() {
     <div >
       <div className=' justify-center flex'>
         <div className=' w-[1000px]  justify-start'>
-
           <div className="w-60 h-auto p-4 border border-gray-200 shadow-md  justify-center flex flex-col items-start">
-
             <div className="w-76 h-30 flex justify-center items-center ">
               <img
                 src='/book1.png/'
-                className="w-34 h-32"
+                className="w-34 h-32 flex justify-cente"
                 alt=""
               />
             </div>
@@ -37,12 +35,8 @@ function BookCard() {
               <h1 className='text-xs text-center mt-2 line-through '>Rs.2000</h1>
             </div>
           </div>
-
         </div>
-
-
       </div>
-
     </div>
   );
 }
