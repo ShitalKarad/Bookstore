@@ -64,6 +64,10 @@ function Login() {
         }
     };
     
+    const logIn=()=>{
+        console.log("Log in")
+        router.push('/dashboard')
+      }
 
     return (
         <div className="w-[100%]  flex justify-center items-center bg-slate-400">
@@ -139,7 +143,7 @@ function Login() {
                         className="mt-2 flex w-full justify-center rounded-sm bg-red-800 px-3 py-2 
                         text-sm font-semibold leading-2 text-white shadow-sm hover:bg-indigo-500 
                         focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
-                         focus-visible:outline-indigo-600 mr-4"
+                         focus-visible:outline-indigo-600 mr-4"  onClick={logIn}
                     >
                         Login
                     </button>

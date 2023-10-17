@@ -10,8 +10,12 @@ function BookDetail() {
                 <Appbar />
             </header>
 
-            <div className=' justify-center flex'>
+            <div className=' justify-center flex p-8'>
+
                 <div className=' w-[1000px] justify-start '>
+                    <div className='justify-flex'>
+                        <h2 className='ml-100'>Home / Book(01)</h2>
+                    </div>
                     <div className='flex space-x-10 p-8 '>
                         <div className=''>
                             <div className="w-auto h-auto p-6 justify-center border border-gray-200 shadow-md flex flex-col items-start">
@@ -131,7 +135,7 @@ function BookDetail() {
 
                             <div className='mt-4'>
                                 <div className='flex space-x-2.5'>
-                                    <button className='bg-gray-200 border  px-0.5 border-gray-400 rounded-full'>SB</button>
+                                    <button className='bg-gray-200 border  p-0.5 border-gray-400 rounded-full'>SB</button>
                                     <h2>Shweta Bodkar</h2>
                                 </div>
                                 <div className='ml-6'>
@@ -145,7 +149,7 @@ function BookDetail() {
                                         <StarBorderOutlinedIcon style={{ color: 'yellow' }} />
                                     </IconButton>
                                     <IconButton>
-                                    <StarBorderOutlinedIcon style={{ color: 'yellow' }} />
+                                        <StarBorderOutlinedIcon style={{ color: 'yellow' }} />
                                     </IconButton>
                                     <IconButton>
                                         <StarBorderOutlinedIcon />
@@ -162,7 +166,7 @@ function BookDetail() {
             </div>
         </div >
 
-    )
+)
 }
 
 export default BookDetail
