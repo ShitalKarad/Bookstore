@@ -2,9 +2,17 @@ import React from 'react';
 import BookDetail from '../bookdetail/page';
 import Link from 'next/link';
 import Appbar from '../header/page';
+import { useRouter } from 'next/navigation';
 
-function BookCard() {
-
+function BookCard({book}) {
+  const router = useRouter();
+  const handleBookDetails = ()=>{
+    router.push('/component/bookdetail',{state:book})
+    // <BookDetail 
+    // // book = {book}
+    // >
+  }
+  
   return (
     <div >
       <div className=' justify-center flex'>
@@ -15,15 +23,16 @@ function BookCard() {
                 src='/book1.png/'
                 className="w-[95px] h-[125px] flex justify-cente"
                 alt=""
+                onClick={handleBookDetails}
               />
             </div>
 
             <div className='p-4'>
               <div>
-                <div className="font-bold text-base leading-4 tracking-normal text-black font-roboto  ">Don't Make Me Think</div>
+                <div className="font-bold text-base leading-4 tracking-normal text-black font-roboto  ">{book.description}</div>
               </div>
               <div className="mt-1">
-                <div className='font-normal text-xs leading-4 tracking-normal font-roboto text-gray-500'>by Steve Krug</div>
+                <div className='font-normal text-xs leading-4 tracking-normal font-roboto text-gray-500'>{book.author}</div>
               </div>
               <div className="mt-1">
                 <div className='flex space-x-1.5'>
@@ -32,8 +41,8 @@ function BookCard() {
                 </div>
               </div>
               <div className="mt-1 flex flex-row space-x-2.5">
-                <h5 className='text-md font-bold'>Rs.1500</h5>
-                <h1 className='text-xs text-center mt-1 line-through '>Rs.2000</h1>
+                <h5 className='text-md font-bold'>Rs.{book.discountPrice}</h5>
+                <h1 className='text-xs text-center mt-1 line-through '>Rs.{book.price}</h1>
               </div>
             </div>
           </div>

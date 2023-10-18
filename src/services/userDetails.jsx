@@ -11,7 +11,8 @@ export const signup = async (object) => {
 
   export const login = async (object) => {
     let response = await axios.post(
-      `${url}/login`,
+      `https://bookstore.incubation.bridgelabz.com/bookstore_user/login
+      `,
       object
     );
     return response;

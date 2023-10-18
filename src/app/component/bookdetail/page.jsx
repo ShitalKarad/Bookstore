@@ -1,9 +1,16 @@
+'use client'
 import React from 'react'
 import Appbar from '../header/page'
 import StarBorderOutlinedIcon from '@mui/icons-material/StarBorderOutlined';
 import { IconButton } from '@mui/material';
+import { useRouter } from 'next/navigation';
 
 function BookDetail() {
+    const router = useRouter();
+    const {state} = router;
+    console.log(state,"state");
+    const book = state ? JSON.parse(state.book) : null;
+
     return (
         <div>
             <header>
@@ -43,9 +50,9 @@ function BookDetail() {
                         <div>
                             <div class="border-b-2 border-gray-200 pb-3.5 ">
                                 <div className="mt-2">
-                                    <div className="text-md text-slate-800 font-bold">Don't Make Me Think</div>
+                                    <div className="text-md text-slate-800 font-bold">{book.description}</div>
                                 </div>
-                                <div className="">
+                                <div >
                                     <div>by Steve Krug</div>
                                 </div>
                                 <div className="mt-1">

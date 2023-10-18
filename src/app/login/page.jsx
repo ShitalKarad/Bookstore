@@ -5,68 +5,46 @@ import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { login } from '@/services/userDetails';
+import Cookies from 'js-cookie';
+
 function Login() {
 
     const router = useRouter();
     const isLoginPage = router.pathname === '/login';
+    const [data, setData] = useState({
+        email: '',
+        password: ''
+    })
+
+    const [errors, setErrors] = useState({});
 
     const [showPassword, setShowPassword] = useState(true);
-    const [formData, setFormData] = useState({
-        email: '',
-        password: '',
-    });
-    const [errors, setErrors] = useState({});
 
     const handlePassword = () => {
         setShowPassword((previous) => !previous);
     };
+   
+    const handleChange = (e) => {
+        setData({
+            ...data,
+            [e.target.id]: e.target.value
+        })
+    }
 
-    const handleInputChange = (event) => {
-        const { name, value } = event.target;
-        setFormData({
-            ...formData,
-            [name]: value,
-        });
-    };
-
-
-    const validateEmail = (email) => {
-        const emailPattern = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
-        return emailPattern.test(email);
-    };
-
-    const validatePassword = (password) => {
-        const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-        return passwordPattern.test(password);
-    };
-
-    const handleSubmit = (e) => {
+    const submit = async (e) => {
         e.preventDefault();
+        console.log("login")
+        const res = await login(data);
+        console.log("data", data);
+        const token = res.data.result.accessToken;
+        console.log(token,"token");
+        Cookies.set('token',token)
+        localStorage.setItem('token',token)
 
-        const validationErrors = {};
+        console.log("res-->", res);
+        router.push("/dashboard");
 
-        if (!formData.email.trim()) {
-            validationErrors.email = 'Email is required';
-        } else if (!validateEmail(formData.email)) {
-            validationErrors.email = 'Invalid email format';
-        }
-
-        if (!formData.password.trim()) {
-            validationErrors.password = 'Password is required';
-        } else if (!validatePassword(formData.password)) {
-            validationErrors.password = 'Password is not strong enough';
-        }
-
-        setErrors(validationErrors);
-
-        if (Object.keys(validationErrors).length === 0) {
-            // Handle form submission or further actions
-        }
-    };
-
-    const logIn = () => {
-        console.log("Log in")
-        router.push('/dashboard')
     }
 
     return (
@@ -75,12 +53,10 @@ function Login() {
                 <div className=" hidden md:flex md:h-[95%] md:w-[26%]  bg-slate-200  rounded-1-md flex justify-center items-center">
                     <img src="logoImage.png" alt="" className='bg-transparent h-[245px] w-[245px] rounded-full my-16  ' />
                 </div>
-                <form className="space-y-4 shadow-lg  sm:w-full px-10 md:w-[28%] bg-white justify-center items-center py-8 my-20 flex flex-col" onSubmit={handleSubmit}>
+                <form className="space-y-4 shadow-lg  sm:w-full px-10 md:w-[28%] bg-white justify-center items-center py-8 my-20 flex flex-col" >
                     <div className="flex justify-between text-2xl  font-medium leading-8 text-uppercase text-black flex-initial w-64 mb-1">
                         <h2>
-
                             <h2 className={isLoginPage ? 'text-red-500 underline' : ''}>LOGIN</h2>
-
                         </h2>
                         <Link href={"/signup"}>
                             SIGNUP
@@ -97,9 +73,9 @@ function Login() {
                                 size="small"
                                 type="email"
                                 variant="outlined"
-                                name="email"
-                                value={formData.email}
-                                onChange={handleInputChange}
+                                id="email"
+                                value={data.email}
+                                onChange={handleChange}
                                 required
                                 error={errors.email !== undefined}
                                 helperText={errors.email}
@@ -116,9 +92,9 @@ function Login() {
                                 size="small"
                                 variant="outlined"
                                 type={showPassword ? 'password' : 'text'}
-                                name="password"
-                                value={formData.password}
-                                onChange={handleInputChange}
+                                id="password"
+                                value={data.password}
+                                onChange={handleChange}
                                 required
                                 error={errors.password !== undefined}
                                 helperText={errors.password}
@@ -140,11 +116,11 @@ function Login() {
 
                     <div className="flex-initial w-64">
                         <button
-                            type="submit"
+                            type="button"
                             className="mt-2 flex w-full justify-center rounded-sm bg-red-800 px-3 py-2 
                         text-sm font-semibold leading-2 text-white shadow-sm hover:bg-indigo-500 
                         focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
-                         focus-visible:outline-indigo-600 mr-4"  onClick={logIn}
+                         focus-visible:outline-indigo-600 mr-4" onClick={submit}
                         >
                             Login
                         </button>

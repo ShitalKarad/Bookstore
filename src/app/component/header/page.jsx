@@ -94,8 +94,8 @@ function Appbar() {
             <Toolbar className='bg-red-800 flex justify-center'>
                 <div clss="h-[40px] ">
                     <div>
-                        <IconButton className='text-white mx-25px flex space-x-2.5'>
-                            <AutoStoriesOutlinedIcon className='text-3xl  ' />
+                        <IconButton  className='text-white mx-25px flex space-x-2.5'>
+                            <AutoStoriesOutlinedIcon style={{ color: 'white' }} className='text-3xl  ' />
                             <h1 className='text-white px-25px flex text-lg '>Bookstore</h1>
                         </IconButton>
 
@@ -107,7 +107,7 @@ function Appbar() {
                     className='bg-white rounded-lg '
                 >
                     <SearchIconWrapper>
-                        <SearchIcon className='text-black' />
+                        <SearchIcon style={{ color: 'white' }} />
                     </SearchIconWrapper>
                     <box
                         className='w-[600px] h-[38px] mr-5.5 flex justify-start bg-white-800 '
@@ -124,15 +124,15 @@ function Appbar() {
 
                 <Box>
                     <Tooltip title="Open settings">
-                        <IconButton className='text-white' onClick={handleOpenUserMenu} >
+                        <IconButton style={{ color: 'white' }} onClick={handleOpenUserMenu} >
                             <PermIdentityOutlinedIcon />
                         </IconButton>
 
 
                         <Link  href="/component/mycart"> {/* Use Link to navigate to the OrderSuccess page */}
                             <a>
-                            <IconButton className='text-white'>
-                            <ShoppingCartOutlinedIcon />
+                            <IconButton style={{ color: 'white' }}>
+                            <ShoppingCartOutlinedIcon  />
                         </IconButton>
                             </a>
                         </Link>

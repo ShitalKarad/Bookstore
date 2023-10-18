@@ -126,8 +126,9 @@ function Signup() {
    
 
 
-    const handleSubmit = async () => {
-        
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        console.log("login")
         if (
             !errors.fullName &&
             !errors.email &&
