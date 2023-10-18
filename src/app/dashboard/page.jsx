@@ -11,10 +11,10 @@ function Dashboard() {
         <Appbar />
       </header >
       <div className=' justify-center flex'>
-        <div className=' w-[1000px] justify-start '>
+        <div className=' lg:w-[1000px]  xs:justify-center md:w-full w-[1000px] justify-start '>
 
           <div className='m-4 '>
-            <div className='flex justify-between  p-4'>
+            <div className='flex lg justify-between  p-4'>
               <div className='flex space-x-1.5'>
                 <h3 className='font-bold text-xl leading-6'>Books</h3>
                 <h1 className='text-xs mt-2'>
@@ -28,7 +28,7 @@ function Dashboard() {
                 <option value="price"> Newest Arrivals</option>
               </select>
             </div>
-            <div className='mt-2'>
+            <div className='mt-2 sx'>
               <BookCard />
             </div>
           </div>

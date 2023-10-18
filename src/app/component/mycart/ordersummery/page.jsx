@@ -1,43 +1,37 @@
-import React from 'react'
+import React from 'react';
+import Link from 'next/link'; // Import the Link component
+import MyCart from '../cartOne/mycart/page';
 
-function OrderSummery() {
+function OrderSummary() {
     return (
         <div>
-            <div className=' justify-center flex p-15 '>
-                <div className=' w-[800px]  border border-gray-200 justify-start '>
-                    <div className='flex justify-between  p-4'>
-                        <h2>Order Summery(1)</h2>
+            <div className='justify-center flex'>
+                <div className='w-[700px] border border-gray-200 justify-start'>
+                    <div className='flex justify-between p-4 font-bold font-medium text-base leading-6 tracking-normal text-gray-700 opacity-100'>
+                        <h2>Order Summary</h2>
                     </div>
-                    <div className="w-auto h-auto p-4 gap-x-9   flex ">
-                        <div className=" flex justify-start ">
-                            <img
-                                src='/book1.png/'
-                                className="w-[100px] h-28 flex justify-cente"
-                                alt=""
-                            />
-                        </div>
-
+                    <div>
                         <div>
-                            <div className="mt-2">
-                                <div className="text-md text-slate-800 font-bold">Don't Make Me Think</div>
-                            </div>
-                            <div >
-                                <div className="text-xs text-gray-300">by Steve Krug</div>
-                            </div>
-
-                            <div className="mt-2 flex flex-row space-x-2.5">
-                                <h5 className='text-md font-bold text-xl'>Rs.1500</h5>
-                                <h1 className='text-xs   text-gray-300 text-center mt-2 line-through '>Rs.2000</h1>
-                            </div>
+                            <MyCart />
                         </div>
-
                     </div>
-                    <button className='ml-auto mr-3.5 flex justify-center rounded-4 py-2 px-3 flex-row-reverse text-white bg-indigo-700 w-auto mb-4 '>Checkout</button>
-
+                    <div>
+                        <Link  href="/ordersucessfully"> {/* Use Link to navigate to the OrderSuccess page */}
+                            <a>
+                                <button
+                                    className='ml-auto mr-3.5 text-xs flex justify-center rounded-6 
+                                    py-1 px-4 flex-row-reverse text-white bg-indigo-700 w-auto mb-4 
+                                    font-normal text-base leading-4 tracking-normal text-white uppercase font-lato'
+                                >
+                                    Checkout
+                                </button>
+                            </a>
+                        </Link>
+                    </div>
                 </div>
             </div>
         </div>
-    )
+    );
 }
 
-export default OrderSummery
+export default OrderSummary;

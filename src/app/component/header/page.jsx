@@ -10,12 +10,12 @@ import InputBase from '@mui/material/InputBase';
 import PermIdentityOutlinedIcon from '@mui/icons-material/PermIdentityOutlined';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import AutoStoriesOutlinedIcon from '@mui/icons-material/AutoStoriesOutlined';
-
+import Link from 'next/link';
 import Tooltip from '@mui/material/Tooltip';
 import Box from '@mui/material/Box';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
-import { Icon } from '@mui/material';
+import MyCart from '../mycart/page';
 
 function Appbar() {
 
@@ -127,9 +127,17 @@ function Appbar() {
                         <IconButton className='text-white' onClick={handleOpenUserMenu} >
                             <PermIdentityOutlinedIcon />
                         </IconButton>
-                        <IconButton className='text-white'>
+
+
+                        <Link  href="/component/mycart"> {/* Use Link to navigate to the OrderSuccess page */}
+                            <a>
+                            <IconButton className='text-white'>
                             <ShoppingCartOutlinedIcon />
                         </IconButton>
+                            </a>
+                        </Link>
+
+                       
                     </Tooltip>
                     <Menu
 

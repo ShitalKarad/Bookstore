@@ -7,7 +7,7 @@ function MyCart() {
                 <div className=" flex justify-start ">
                     <img
                         src='/book1.png/'
-                        className="w-[100px] h-28 flex justify-cente"
+                        className="w-[100px] h-[100px] flex justify-cente"
                         alt=""
                     />
                 </div>

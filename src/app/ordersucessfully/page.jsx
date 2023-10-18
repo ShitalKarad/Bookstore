@@ -1,6 +1,7 @@
 'use client'
 import React, { useState, useEffect } from 'react';
-import Appbar from '../../header/page';
+import Appbar from '../component/header/page';
+import Link from 'next/link';
 
 function OrderSuccess() {
   const [isClient, setIsClient] = useState(false);
@@ -51,9 +52,15 @@ function OrderSuccess() {
             </div>
 
             <div className='mt-6'>
-              <button className="ml-auto mr-3.5 flex justify-center text-xs rounded-sm px-5 flex-row-reverse text-white bg-indigo-700 w-auto mb-4 text-base font-medium leading-6 tracking-normal p-1 uppercase">
-                Continue Shopping
-              </button>
+
+              <Link href="/dashboard">
+
+                <button className="ml-auto mr-3.5 flex justify-center text-xs rounded-sm px-5 flex-row-reverse text-white bg-indigo-700 w-auto mb-4 text-base font-medium leading-6 tracking-normal p-1 uppercase">
+                  Continue Shopping
+                </button>
+
+              </Link>
+
             </div>
           </div>
         </div>
