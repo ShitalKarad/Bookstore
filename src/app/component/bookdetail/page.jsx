@@ -1,15 +1,27 @@
 'use client'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Appbar from '../header/page'
 import StarBorderOutlinedIcon from '@mui/icons-material/StarBorderOutlined';
 import { IconButton } from '@mui/material';
-import { useRouter } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
+import { getBooks } from '@/services/dataService';
 
 function BookDetail() {
-    const router = useRouter();
-    const {state} = router;
-    console.log(state,"state");
-    const book = state ? JSON.parse(state.book) : null;
+    const [book,setBook] = useState({});
+    const searchParams = useSearchParams();
+    const id = searchParams.get('id');
+    console.log("id",id);
+   const getSingleBooks = async()=> {
+    let res = await getBooks();
+    const books = res.data.result
+    const singleBook = books.filter((item) => item._id === id);
+    setBook(singleBook[0]);
+   }
+   console.log(book);
+
+   useEffect(()=> {
+    getSingleBooks();
+   },[])
 
     return (
         <div>
@@ -50,10 +62,10 @@ function BookDetail() {
                         <div>
                             <div class="border-b-2 border-gray-200 pb-3.5 ">
                                 <div className="mt-2">
-                                    <div className="text-md text-slate-800 font-bold">{book.description}</div>
+                                    <div className="text-md text-slate-800 font-bold">{book.bookName}</div>
                                 </div>
                                 <div >
-                                    <div>by Steve Krug</div>
+                                    <div>{book.author}</div>
                                 </div>
                                 <div className="mt-1">
                                     <div className='flex space-x-1.5'>
@@ -62,15 +74,15 @@ function BookDetail() {
                                     </div>
                                 </div>
                                 <div className="mt-2 flex flex-row space-x-2.5">
-                                    <h5 className='text-md font-bold text-xl'>Rs.1500</h5>
-                                    <h1 className='text-xs text-center mt-2 line-through '>Rs.2000</h1>
+                                    <h5 className='text-md font-bold text-xl'>{book.discountPrice}</h5>
+                                    <h1 className='text-xs text-center mt-2 line-through '>{book.price}</h1>
                                 </div>
                             </div>
                             <div className='mt-6 pr-3.5 border-b-2 border-gray-200 pb-3.5 '>
                                 <h3>
                                     <li>Book Detail</li>
                                     <p className='mt-5'>
-                                        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
+                                        {/* Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
                                         tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
                                         At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren,
                                         no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet,
@@ -78,7 +90,7 @@ function BookDetail() {
                                         dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo
                                         dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem
                                         ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-                                        diam nonumy eirmod tempor invidunt                        </p>
+    diam nonumy eirmod tempor invidunt                        */} {book.description}</p> 
                                 </h3>
                             </div>
                             <div className='mt-6'>

@@ -7,10 +7,9 @@ import { useRouter } from 'next/navigation';
 function BookCard({book}) {
   const router = useRouter();
   const handleBookDetails = ()=>{
-    router.push('/component/bookdetail',{state:book})
-    // <BookDetail 
-    // // book = {book}
-    // >
+    console.log()
+     router.push(`/component/bookdetail?id=${book._id}`)
+   
   }
   
   return (
@@ -29,7 +28,7 @@ function BookCard({book}) {
 
             <div className='p-4'>
               <div>
-                <div className="font-bold text-base leading-4 tracking-normal text-black font-roboto  ">{book.description}</div>
+                <div className="font-bold text-base leading-4 tracking-normal text-black font-roboto  ">{book.bookName}</div>
               </div>
               <div className="mt-1">
                 <div className='font-normal text-xs leading-4 tracking-normal font-roboto text-gray-500'>{book.author}</div>
