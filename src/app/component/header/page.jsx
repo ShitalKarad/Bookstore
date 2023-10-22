@@ -15,7 +15,6 @@ import Tooltip from '@mui/material/Tooltip';
 import Box from '@mui/material/Box';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
-import MyCart from '../mycart/page';
 
 function Appbar() {
 
@@ -29,7 +28,7 @@ function Appbar() {
             width: 'auto',
         },
         [theme.breakpoints.down('sm')]: {
-            display: 'none', // Hide the search bar on screens below 600px width
+            display: 'none',
         },
     }));
 
@@ -54,22 +53,16 @@ function Appbar() {
             },
         },
         [theme.breakpoints.down('sm')]: {
-            display: 'none', // Hide the input field on screens below 600px width
+            display: 'none',
         },
     }));
-
 
     const [isClicked, setIsClicked] = useState(
         false
     );
 
-    const handleClearSearch = () => {
-        // setSearch(''); // Clear the search input by setting it to an empty string
-    };
     const handleSearchClick = (e) => {
         setIsClicked(true);
-        // setSearch(e.target.value);
-
     };
 
     const settings = ['Logout'];
@@ -85,40 +78,31 @@ function Appbar() {
         setAnchorElUser(null);
     };
 
-    //const navigate = useNavigate()
     let poupProfile = () => {
-
     }
     return (
         <AppBar position="sticky" className=' bg-red-400'>
             <Toolbar className='bg-red-800 flex justify-center'>
                 <div clss="h-[40px] ">
                     <div>
-                        <IconButton  className='text-white mx-25px flex space-x-2.5'>
+                        <IconButton className='text-white mx-25px flex space-x-2.5'>
                             <AutoStoriesOutlinedIcon style={{ color: 'white' }} className='text-3xl  ' />
                             <h1 className='text-white px-25px flex text-lg '>Bookstore</h1>
                         </IconButton>
-
                     </div>
                 </div>
                 <Search
                     onChange={handleSearchClick}
-                    // value={search} 
-                    className='bg-white rounded-lg '
-                >
+                    className='bg-white rounded-lg '>
                     <SearchIconWrapper>
                         <SearchIcon style={{ color: 'white' }} />
                     </SearchIconWrapper>
                     <box
-                        className='w-[600px] h-[38px] mr-5.5 flex justify-start bg-white-800 '
-                    >
+                        className='w-[600px] h-[38px] mr-5.5 flex justify-start bg-white-800 '>
                         <StyledInputBase
                             placeholder="Search…"
                             inputProps={{ 'aria-label': 'search' }}
-                            className='text-black'
-
-                        // value={search}
-                        />
+                            className='text-black' />
                     </box>
                 </Search>
 
@@ -128,16 +112,14 @@ function Appbar() {
                             <PermIdentityOutlinedIcon />
                         </IconButton>
 
-
-                        <Link  href="/component/mycart"> {/* Use Link to navigate to the OrderSuccess page */}
+                        <Link href="/component/mycart"> {/* Use Link to navigate to the OrderSuccess page */}
                             <a>
-                            <IconButton style={{ color: 'white' }}>
-                            <ShoppingCartOutlinedIcon  />
-                        </IconButton>
+                                <IconButton style={{ color: 'white' }}>
+                                    <ShoppingCartOutlinedIcon />
+                                </IconButton>
                             </a>
                         </Link>
 
-                       
                     </Tooltip>
                     <Menu
 

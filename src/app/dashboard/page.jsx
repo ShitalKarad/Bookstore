@@ -6,10 +6,8 @@ import { getBooks } from '@/services/dataService';
 
 function Dashboard() {
   const [getData, setGetData] = useState([]);
-  const [toggleCart, setToggleCart] = useState(
-    false
-  )
-  
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage] = useState(8); // Number of items to display per page
 
   const getBook = async () => {
     try {
@@ -25,6 +23,16 @@ function Dashboard() {
     getBook();
   }, []);
 
+  // Calculate the index range for the current page
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = getData.slice(indexOfFirstItem, indexOfLastItem);
+
+  // Change the current page
+  const paginate = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  }
+
   return (
     <div>
       <header>
@@ -36,23 +44,28 @@ function Dashboard() {
             <div className='flex lg justify-between p-4'>
               <div className='flex space-x-1.5'>
                 <h3 className='font-bold text-xl leading-6'>Books</h3>
-                <h1 className='text-xs mt-2'>(128 items)</h1>
+                <h1 className='text-xs mt-2'>({getData.length} items)</h1>
               </div>
               <select name="book" id="book" className='border border-gray-200 p-2 text-xs leading-6'>
                 <option value="sort by relevance">Sort by relevance</option>
-                <option value="price"> Price:low to high</option>
-                <option value="price"> Price:high to low</option>
+                <option value="price"> Price: low to high</option>
+                <option value="price"> Price: high to low</option>
                 <option value="price"> Newest Arrivals</option>
               </select>
             </div>
             <div className='mt-2 sx'>
               <div className="flex flex-wrap">
-                {getData.map((book, index) => (
+                {currentItems.map((book, index) => (
                   <div key={index} className="w-1/4 p-4">
                     <BookCard book={book} />
                   </div>
                 ))}
               </div>
+            </div>
+            <div className="pagination">
+              {Array.from({ length: Math.ceil(getData.length / itemsPerPage) }, (_, index) => (
+                <button key={index} onClick={() => paginate(index + 1)}>{index + 1}</button>
+              ))}
             </div>
           </div>
         </div>

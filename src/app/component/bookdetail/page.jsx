@@ -5,23 +5,31 @@ import StarBorderOutlinedIcon from '@mui/icons-material/StarBorderOutlined';
 import { IconButton } from '@mui/material';
 import { useSearchParams } from 'next/navigation';
 import { getBooks } from '@/services/dataService';
+import MyCartButton from '../mycart/cartOne/mycartbutton/page';
+
 
 function BookDetail() {
-    const [book,setBook] = useState({});
+    const[displayButton, setDisplayButton] =useState(true);
+
+    const handleButtonChange = () =>{
+        setDisplayButton((prevState) => !prevState);
+    }
+
+    const [book, setBook] = useState({});
+
     const searchParams = useSearchParams();
     const id = searchParams.get('id');
-    console.log("id",id);
-   const getSingleBooks = async()=> {
-    let res = await getBooks();
-    const books = res.data.result
-    const singleBook = books.filter((item) => item._id === id);
-    setBook(singleBook[0]);
-   }
-   console.log(book);
-
-   useEffect(()=> {
-    getSingleBooks();
-   },[])
+    const getSingleBooks = async () => {
+        let res = await getBooks();
+        const books = res.data.result
+        const singleBook = books.filter((item) => item._id === id);
+        setBook(singleBook[0]);
+    }
+    console.log(book);
+    useEffect(() => {
+        getSingleBooks();
+    }, [])
+    console.log(book,"bo");
 
     return (
         <div>
@@ -30,7 +38,6 @@ function BookDetail() {
             </header>
 
             <div className=' justify-center flex p-8'>
-
                 <div className=' w-[1000px] justify-start '>
                     <div className='justify-flex'>
                         <h2 className='ml-100'>Home / Book(01)</h2>
@@ -47,10 +54,14 @@ function BookDetail() {
                                 </div>
                                 <div>
                                     <div class="flex flex-initial w-64">
-                                        <button className="mt-8 flex w-full justify-center rounded-sm bg-red-800
+                                        { displayButton ? 
+                                            (<button className="mt-8 flex w-full justify-center rounded-sm bg-red-800
                                          w-[150px] px-3 py-2 
                                         text-sm font-semibold leading-2 text-white shadow-sm
-                                         mr-4">ADD TO BAG</button>
+                                         mr-4" onClick={handleButtonChange}>ADD TO BAG</button>
+                                         ) : 
+                                         (<MyCartButton/>)
+                                         }
 
                                         <button className="mt-8 flex w-full justify-center rounded-sm bg-black w-[160px]
                                         px-3 py-2 text-sm font-semibold leading-2 text-white shadow-sm   
@@ -65,39 +76,31 @@ function BookDetail() {
                                     <div className="text-md text-slate-800 font-bold">{book.bookName}</div>
                                 </div>
                                 <div >
-                                    <div>{book.author}</div>
+                                    <div className='text-xs text-gray-400'>{book.author}</div>
                                 </div>
-                                <div className="mt-1">
+                                <div className="mt-1.5">
                                     <div className='flex space-x-1.5'>
                                         <button className='bg-green-700 w-[40px] text-xs h-auto text-white'>4.5 *</button>
-                                        <h1 className='text-xs'>(20)</h1>
+                                        <h1 className='text-xs  text-gray-400'>(20)</h1>
                                     </div>
                                 </div>
                                 <div className="mt-2 flex flex-row space-x-2.5">
-                                    <h5 className='text-md font-bold text-xl'>{book.discountPrice}</h5>
-                                    <h1 className='text-xs text-center mt-2 line-through '>{book.price}</h1>
+                                    <h5 className='text-md font-bold text-xl'> Rs.{book.discountPrice}</h5>
+                                    <h1 className='text-xs text-center mt-2 line-through  text-gray-400 '>{book.price}</h1>
                                 </div>
                             </div>
-                            <div className='mt-6 pr-3.5 border-b-2 border-gray-200 pb-3.5 '>
+                            <div className='mt-4 pr-3.5 border-b-2 border-gray-200 pb-2.5 '>
                                 <h3>
-                                    <li>Book Detail</li>
-                                    <p className='mt-5'>
-                                        {/* Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
-                                        tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
-                                        At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren,
-                                        no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet,
-                                        consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
-                                        dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo
-                                        dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem
-                                        ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-    diam nonumy eirmod tempor invidunt                        */} {book.description}</p> 
+                                    <h1 className=' font-normal text-md'>Book Detail</h1>
+                                    <p className='mt-1 text-xs'>
+                                        {book.description}</p>
                                 </h3>
                             </div>
-                            <div className='mt-6'>
+                            <div className='mt-4'>
                                 <h3>Customer Feedback</h3>
-                                <div className='bg-gray-200 h-[160px] flex flex-col mt-6'>
+                                <div className='bg-gray-200 h-[160px] flex flex-col mt-4'>
                                     <div>
-                                        <h2 class="px-2.5">Overall rating</h2>
+                                        <h2 class="px-2.5 text-xs">Overall rating</h2>
                                     </div>
                                     <div>
                                         <IconButton>
@@ -118,7 +121,7 @@ function BookDetail() {
                                     </div>
 
                                     <box className='bg-white h-[45px] p-1.5 m-2.5 '>
-                                        <h2 className='text-black'>Write your review  </h2>
+                                        <h2 className='text-gray-200'>Write your review  </h2>
                                     </box>
 
                                     <button className='ml-auto mr-2.5 flex justify-center  flex-row-reverse bg-indigo-500 w-[70px] mb-4 '> submit</button>
@@ -126,7 +129,7 @@ function BookDetail() {
                             </div>
                             <div className='mt-4'>
                                 <div className='flex space-x-2.5'>
-                                    <button className='bg-gray-200 border  px-0.5 border-gray-400 rounded-full'>AC</button>
+                                    <button className='bg-gray-200 border  text-xs  w-6 h-6 border-gray-400 rounded-full'>AC</button>
                                     <h2>Aniket Chile</h2>
                                 </div>
                                 <div className='ml-6'>
@@ -147,14 +150,13 @@ function BookDetail() {
                                     </IconButton>
                                 </div>
                                 <div>
-                                    <p className='ml-9'>Good product.Even though the transition could have been better </p>
+                                    <p className='ml-9 text-xs'>Good product.Even though the transition could have been better </p>
                                 </div>
-
                             </div>
 
                             <div className='mt-4'>
                                 <div className='flex space-x-2.5'>
-                                    <button className='bg-gray-200 border  p-0.5 border-gray-400 rounded-full'>SB</button>
+                                    <button className='bg-gray-200 border w-6 h-6 text-xs border-gray-400 rounded-full'>SB</button>
                                     <h2>Shweta Bodkar</h2>
                                 </div>
                                 <div className='ml-6'>
@@ -175,17 +177,15 @@ function BookDetail() {
                                     </IconButton>
                                 </div>
                                 <div>
-                                    <p className='ml-9'>Good product.Even though the transition could have been better </p>
+                                    <p className='ml-9 text-xs'>Good product.Even though the transition could have been better </p>
                                 </div>
-
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div >
-
-)
+    )
 }
 
 export default BookDetail

@@ -52,15 +52,11 @@ function OrderSuccess() {
             </div>
 
             <div className='mt-6'>
-
               <Link href="/dashboard">
-
                 <button className="ml-auto mr-3.5 flex justify-center text-xs rounded-sm px-5 flex-row-reverse text-white bg-indigo-700 w-auto mb-4 text-base font-medium leading-6 tracking-normal p-1 uppercase">
                   Continue Shopping
                 </button>
-
               </Link>
-
             </div>
           </div>
         </div>

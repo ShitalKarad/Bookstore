@@ -18,13 +18,12 @@ function Login() {
     })
 
     const [errors, setErrors] = useState({});
-
     const [showPassword, setShowPassword] = useState(true);
 
     const handlePassword = () => {
         setShowPassword((previous) => !previous);
     };
-   
+
     const handleChange = (e) => {
         setData({
             ...data,
@@ -38,10 +37,9 @@ function Login() {
         const res = await login(data);
         console.log("data", data);
         const token = res.data.result.accessToken;
-        console.log(token,"token");
-        Cookies.set('token',token)
-        localStorage.setItem('token',token)
-
+        console.log(token, "token");
+        Cookies.set('token', token)
+        localStorage.setItem('token', token)
         console.log("res-->", res);
         router.push("/dashboard");
 
@@ -78,8 +76,7 @@ function Login() {
                                 onChange={handleChange}
                                 required
                                 error={errors.email !== undefined}
-                                helperText={errors.email}
-                            />
+                                helperText={errors.email} />
                         </div>
                     </div>
                     <div>
@@ -120,8 +117,7 @@ function Login() {
                             className="mt-2 flex w-full justify-center rounded-sm bg-red-800 px-3 py-2 
                         text-sm font-semibold leading-2 text-white shadow-sm hover:bg-indigo-500 
                         focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
-                         focus-visible:outline-indigo-600 mr-4" onClick={submit}
-                        >
+                         focus-visible:outline-indigo-600 mr-4" onClick={submit}>
                             Login
                         </button>
                     </div>

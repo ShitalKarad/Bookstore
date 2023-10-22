@@ -3,15 +3,10 @@ import React, { useState } from 'react';
 import { IconButton, TextField } from '@mui/material';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import VisibilityIcon from '@mui/icons-material/Visibility';
-// import { useRouter } from 'next/router';
 import Link from 'next/link';
-//import Image from 'next/image';
 import { signup } from '@/services/userDetails';
-import { useRouter } from 'next/navigation';
+
 function Signup() {
-
-    const router = useRouter()
-
 
     const [showPassword, setShowPassword] = useState(true);
 
@@ -27,31 +22,15 @@ function Signup() {
         setShowPassword((previous) => !previous);
     };
 
-    // const handleInputChange = (event) => {
-    //     const { name, value } = event.target;
-    //     setFormData({
-    //         ...formData,
-    //         [name]: value,
-    //     });
-    // };
-
-    // const validateName = (name) => {
-    //     const namePattern = /^[A-Z]{1}[A-Za-z ]{2,}$/;
-    //     return namePattern.test(name);
-    // }
-
     const namePattern = /^[A-Z]{1}[A-Za-z ]{2,}$/;
     const emailPattern = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
     const passwordPattern =  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
     const mobileNumberPattern = /^[0-9]{10}(\s|-)?[0-9]{0,2}(\s|-)?[0-9]{0,2}$/;
-//event. prevent default
-
 
     const validateName = () => {
         if (!namePattern.test(formData.fullName)) {
             setErrors((prevState) => ({
                 ...prevState,
-                // fullName: "Invalid first name format",
             }));
         } else {
             setErrors((prevState) => ({
@@ -65,7 +44,6 @@ function Signup() {
         if (!emailPattern.test(formData.email)) {
             setErrors((prevState) => ({
                 ...prevState,
-                // email: "Invalid username format",
             }));
         } else {
             setErrors((prevState) => ({
@@ -82,7 +60,6 @@ function Signup() {
             [field]: value,
         }));
 
-        // Call validation function based on the field being updated
         if (field === "fullname") {
             validateName();
         } else if (field === "email") {
@@ -94,12 +71,10 @@ function Signup() {
         }
     };
 
-
     const validatePassword = () => {
         if (!passwordPattern.test(formData.password)) {
             setErrors((prevState) => ({
                 ...prevState,
-                // password: "Password  criteria: at least 8 characters, one uppercase letter, one lowercase letter, and one numeric digit.",
             }));
         } else {
             setErrors((prevState) => ({
@@ -113,7 +88,6 @@ function Signup() {
         if (!mobileNumberPattern.test(formData.mobileNumber)) {
             setErrors((prevState) => ({
                 ...prevState,
-                // mobileNumberPattern: "Enter correact password.",
             }));
         } else {
             setErrors((prevState) => ({
@@ -122,9 +96,6 @@ function Signup() {
             }));
         }
     };
-
-   
-
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -138,60 +109,11 @@ function Signup() {
             console.log("formdata", formData)
             let res = await signup(formData);
             console.log(res);
-            // router.push('/login');
         } else {
-            // Handle validation errors or display a message to the user
             console.error('Validation errors or passwords do not match. Please correct them before proceeding.');
         }
     };
 
-
-
-
-    // const validateForm = () => {
-    //     const validationErrors = {};
-
-    //     if (!formData.fullName.trim()) {
-    //         validationErrors.fullName = 'Full Name is required';
-    //     } else if (!validateName(formData.fullName)) {
-    //         validationErrors.fullName = 'Invalid name format';
-    //     }
-
-    //     if (!formData.email.trim()) {
-    //         validationErrors.email = 'Email is required';
-    //     } else if (!validateEmail(formData.email)) {
-    //         validationErrors.email = 'Invalid email format';
-    //     }
-
-    //     if (!formData.password.trim()) {
-    //         validationErrors.password = 'Password is required';
-    //     } else if (!validatePassword(formData.password)) {
-    //         validationErrors.password = 'Password is not strong enough';
-    //     }
-
-    //     if (!formData.mobileNumber.trim()) {
-    //         validationErrors.mobileNumber = 'Mobile Number is required';
-    //     } else if (!validateMobileNumber(formData.mobileNumber)) {
-    //         validationErrors.mobileNumber = 'Invalid mobile number';
-    //     }
-
-    //     setErrors(validationErrors);
-
-    //     return Object.keys(validationErrors).length === 0;
-    // };
-
-    
-    // const handleSubmit = async () => {
-    //     if (validateForm()) {
-    //         console.log(formData,"formData");
-
-    //         const response = await signup(formData);
-    //         console.log(response,"res");
-    //         if (response.data.success) {
-    //             router.push('/login');
-    //         }
-    //     }
-    // };
 
     return (
         <div className="w-[100%] h-[100%] flex justify-center items-center bg-slate-400">
@@ -236,7 +158,8 @@ function Signup() {
                             variant="outlined"
                             id="email"
                             value={formData.email}
-                            onChange={(e) => handleInputChange(e, "email")}                            required
+                            onChange={(e) => handleInputChange(e, "email")}                        
+                                required
                             error={errors.email !== undefined}
                             helperText={errors.email}
                         />
@@ -282,7 +205,8 @@ function Signup() {
                             variant="outlined"
                             id="mobileNumber"
                             value={formData.mobileNumber}
-                            onChange={(e) => handleInputChange(e, "mobileNumber")}                            required
+                            onChange={(e) => handleInputChange(e, "mobileNumber")}                  
+                          required
                             error={errors.mobileNumber !== undefined}
                             helperText={errors.mobileNumber}
                         />
