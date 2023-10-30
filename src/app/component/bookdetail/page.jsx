@@ -6,19 +6,18 @@ import { IconButton } from '@mui/material';
 import { useSearchParams } from 'next/navigation';
 import { getBooks } from '@/services/dataService';
 import MyCartButton from '../mycart/cartOne/mycartbutton/page';
+import { getCartItems } from '@/services/dataService';
+import { addCartItem } from '@/services/dataService';
 
 
 function BookDetail() {
-    const[displayButton, setDisplayButton] =useState(true);
-
-    const handleButtonChange = () =>{
-        setDisplayButton((prevState) => !prevState);
-    }
+    const[displayButton, setDisplayButton] = useState(true);
 
     const [book, setBook] = useState({});
 
     const searchParams = useSearchParams();
     const id = searchParams.get('id');
+
     const getSingleBooks = async () => {
         let res = await getBooks();
         const books = res.data.result
@@ -26,10 +25,47 @@ function BookDetail() {
         setBook(singleBook[0]);
     }
     console.log(book);
+   
+     console.log(book,"bo");
+
+    const handleButtonChange = () =>{
+        addToCart(id)
+        setDisplayButton((prevState) => !prevState);
+        
+    }
+
+    
+
+    const getCart = async () => {
+       
+        let response = await getCartItems()
+        console.log(book._id)
+
+        for (let i = 0; i < response.data.result.length; i++) {
+            if (response.data.result[i]?.product_id._id === book._id) {
+                let itemNo = response.data.result[i].quantityToBuy
+                console.log(itemNo)
+                setBook(response.data.result[i])
+                setDisplayButton(false)
+            }
+        }
+
+
+
+    }
+
+    const addToCart = async (id) => {
+        let response = await addCartItem(id)
+        console.log(response)
+        await getCart()
+        return response
+    }
+
     useEffect(() => {
+        getCart();
         getSingleBooks();
+       
     }, [])
-    console.log(book,"bo");
 
     return (
         <div>
@@ -53,14 +89,14 @@ function BookDetail() {
                                     />
                                 </div>
                                 <div>
-                                    <div class="flex flex-initial w-64">
+                                    <div class="flex w-[275px]">
                                         { displayButton ? 
                                             (<button className="mt-8 flex w-full justify-center rounded-sm bg-red-800
                                          w-[150px] px-3 py-2 
                                         text-sm font-semibold leading-2 text-white shadow-sm
                                          mr-4" onClick={handleButtonChange}>ADD TO BAG</button>
                                          ) : 
-                                         (<MyCartButton/>)
+                                         (<MyCartButton book={book} setDisplayButton={setDisplayButton} getCart={getCart}  />)
                                          }
 
                                         <button className="mt-8 flex w-full justify-center rounded-sm bg-black w-[160px]

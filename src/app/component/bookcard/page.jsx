@@ -5,9 +5,9 @@ import React from 'react';
 import { useRouter } from 'next/navigation';
 
 function BookCard({ book }) {
+  console.log(book,'bookCard');
   const router = useRouter();
   const handleBookDetails = () => {
-    console.log()
     router.push(`/component/bookdetail?id=${book._id}`)
   }
 

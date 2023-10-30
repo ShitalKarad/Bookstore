@@ -6,6 +6,7 @@ import MyCartButton from './mycartbutton/page.jsx'
 import { useState } from 'react'
 import CustomerDetails from '../customerdetails/page.jsx'
 import OrderSummery from '../ordersummery/page.jsx'
+import { OrderBook } from '@/services/dataService.jsx'
 
 function CartOne() {
 
@@ -13,6 +14,8 @@ function CartOne() {
     const toggleCustomerDetails = () => {
         setIsCustomerDetailsOpen(!isCustomerDetailsOpen);
     };
+
+    //const placeOrder
 
     return (
         <div>
@@ -30,9 +33,9 @@ function CartOne() {
                         <div>
                             <MyCart />
                         </div>
-                        <div className='pb-2'>
-                            <MyCartButton />
-                        </div>
+                        {/* <div >
+                            <MyCartButton className='pl-12' />
+                        </div> */}
                     </div>
                     <div>
                         {isCustomerDetailsOpen ? null : (

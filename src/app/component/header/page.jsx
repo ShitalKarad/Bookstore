@@ -15,8 +15,9 @@ import Tooltip from '@mui/material/Tooltip';
 import Box from '@mui/material/Box';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
+import { useRouter } from 'next/navigation';
 
-function Appbar() {
+function Appbar( {setSearch ,search ,getData}) {
 
     const Search = styled('div')(({ theme }) => ({
         position: 'relative',
@@ -56,19 +57,26 @@ function Appbar() {
             display: 'none',
         },
     }));
+    
 
+   
     const [isClicked, setIsClicked] = useState(
         false
-    );
-
-    const handleSearchClick = (e) => {
+      );
+    
+    
+      const handleClearSearch = () => {
+        setSearch(''); // Clear the search input by setting it to an empty string
+      };
+      const handleSearchClick = (e) => {
         setIsClicked(true);
-    };
-
-    const settings = ['Logout'];
+        setSearch(e.target.value);
+      
+      };
+    
+    const profile = ['Logout'];
 
     const [anchorElUser, setAnchorElUser] = React.useState(null);
-
 
     const handleOpenUserMenu = (event) => {
         setAnchorElUser(event.currentTarget);
@@ -78,21 +86,29 @@ function Appbar() {
         setAnchorElUser(null);
     };
 
+
     let poupProfile = () => {
+        // localStorage.removeItem('token');
+        <link rel="stylesheet" href='/login' />
     }
+
     return (
         <AppBar position="sticky" className=' bg-red-400'>
             <Toolbar className='bg-red-800 flex justify-center'>
                 <div clss="h-[40px] ">
                     <div>
-                        <IconButton className='text-white mx-25px flex space-x-2.5'>
-                            <AutoStoriesOutlinedIcon style={{ color: 'white' }} className='text-3xl  ' />
-                            <h1 className='text-white px-25px flex text-lg '>Bookstore</h1>
-                        </IconButton>
+                        <Link href="/dashboard">
+                            <IconButton className='text-white mx-25px flex space-x-2.5'>
+                                <AutoStoriesOutlinedIcon style={{ color: 'white' }} className='text-3xl  ' />
+                                <h1 className='text-white px-25px flex text-lg '>Bookstore</h1>
+                            </IconButton>
+                        </Link>
+
                     </div>
                 </div>
                 <Search
-                    onChange={handleSearchClick}
+                    // onChange={handleSearchClick}
+                    // value={search}
                     className='bg-white rounded-lg '>
                     <SearchIconWrapper>
                         <SearchIcon style={{ color: 'white' }} />
@@ -101,8 +117,13 @@ function Appbar() {
                         className='w-[600px] h-[38px] mr-5.5 flex justify-start bg-white-800 '>
                         <StyledInputBase
                             placeholder="Search…"
-                            inputProps={{ 'aria-label': 'search' }}
-                            className='text-black' />
+                            // inputProps={{ 'aria-label': 'search' }}
+                            className='text-black'  
+                            value={search}
+                            onChange={handleSearchClick}
+
+                            />
+                       
                     </box>
                 </Search>
 
@@ -136,7 +157,7 @@ function Appbar() {
                         }}
                         open={Boolean(anchorElUser)}
                         onClose={handleCloseUserMenu}>
-                        {settings.map((setting) => (
+                        {profile.map((setting) => (
                             <MenuItem key={setting} onClick={handleCloseUserMenu}>
                                 <Typography onClick={poupProfile}
                                     textAlign="center">{setting}</Typography>
