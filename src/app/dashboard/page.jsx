@@ -83,7 +83,7 @@ function Dashboard() {
                 <div key={index} className="p-4">
                   <BookCard book={book} />
                 </div>
-              ))}
+              ))} 
             </div>
             <div className="pagination">
               {Array.from({ length: Math.ceil((searchToggle ? filterData.length : getData.length) / itemsPerPage) }, (_, index) => (

@@ -58,17 +58,8 @@ import React, { useState, useEffect } from 'react';
 import MyCartButton from '../mycartbutton/page';
 import { getCartItems, removeCartItem } from '@/services/dataService'
 
-function MyCart() {
-  const [cartItems, setCartItems] = useState([]);
-  const [isFetched, setIsFetched] = useState(false);
-
-  const getCart = async () => {
-    if (!isFetched) {
-      const response = await getCartItems();
-      setCartItems(response.data.result);
-      setIsFetched(true);
-    }
-  };
+function MyCart({getCart,cartItems}) {
+ 
 
   useEffect(() => {
     getCart();
@@ -91,10 +82,10 @@ function MyCart() {
           </div>
           <div>
             <div className="mt-2">
-              <div className="text-md text-slate-800 font-bold">{cartItem.product_id.title}</div>
+              <div className="text-md text-slate-800 font-bold">{cartItem.product_id.bookName}</div>
             </div>
             <div>
-              <div className="text-xs text-gray-300">by {cartItem.product_id.author}</div>
+              <div className="text-xs text-gray-300"> {cartItem.product_id.author}</div>
             </div>
             <div className="mt-2 flex flex-row space-x-2.5">
               <h5 className='text-md font-bold text-xl'>Rs. {cartItem.product_id.price}</h5>

@@ -27,14 +27,15 @@ function MyCartButton({ book,setDisplayButton , getCart , cartItem }) {
 
         let response = await modifyCartItem(book._id, count)
         console.log(response)
-        getCart()
+         getCart()
     };
 
     const removeItem = async () => {
-        console.log(book._id)
+        //console.log(book._id)
         let response = await removeCartItem(book._id)
         setDisplayButton(true)
         console.log(response)
+         getCart()
     }
 
    

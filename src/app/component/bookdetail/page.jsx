@@ -11,7 +11,9 @@ import { addCartItem } from '@/services/dataService';
 
 
 function BookDetail() {
-    const[displayButton, setDisplayButton] = useState(true);
+    const[displayButton, setDisplayButton] =useState(true);
+
+    
 
     const [book, setBook] = useState({});
 
@@ -37,7 +39,10 @@ function BookDetail() {
     
 
     const getCart = async () => {
-       
+        // let response = await getCartItems()
+        // console.log( "res from getcartitem",response)
+        // return response
+
         let response = await getCartItems()
         console.log(book._id)
 
@@ -59,6 +64,7 @@ function BookDetail() {
         console.log(response)
         await getCart()
         return response
+        
     }
 
     useEffect(() => {
